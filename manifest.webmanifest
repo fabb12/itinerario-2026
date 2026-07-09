@@ -1,0 +1,19 @@
+{
+  "name": "Itinerario Luglio 2026 · Diario di Viaggio",
+  "short_name": "Itinerario",
+  "description": "Il nostro viaggio da Como al Sud e ritorno — 16 giorni, 8 tappe, luglio 2026.",
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf6ee",
+  "theme_color": "#0d3b4f",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

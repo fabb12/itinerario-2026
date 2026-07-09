@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Itinerario Luglio 2026 · Diario di Viaggio</title>
 <meta name="description" content="Il nostro viaggio da Como al Sud e ritorno — 16 giorni, 8 tappe, luglio 2026.">
+
+<!-- ---------- PWA ---------- -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d3b4f">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Itinerario">
 <style>
   :root{
     --deep:#0d3b4f;
@@ -88,6 +98,10 @@
   }
   .btn-map:hover{background:#22857a;transform:translateY(-1px);}
   .btn-map svg{width:18px;height:18px;fill:currentColor;}
+  .maplink-all{gap:12px;flex-wrap:wrap;}
+  .btn-install{background:var(--gold);box-shadow:0 4px 14px rgba(212,162,78,.35);}
+  .btn-install:hover{background:#c2913f;}
+  .btn-install[hidden]{display:none;}
 
   /* timeline */
   .timeline{position:relative;}
@@ -279,6 +293,10 @@
       <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
       Apri l'intero itinerario su Google Maps
     </a>
+    <button class="btn-map btn-install" id="installBtn" type="button" hidden>
+      <svg viewBox="0 0 24 24"><path d="M12 3a1 1 0 011 1v9.6l3.3-3.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-1.4 0l-5-5a1 1 0 011.4-1.4L11 13.6V4a1 1 0 011-1zM5 19h14a1 1 0 010 2H5a1 1 0 010-2z"/></svg>
+      Installa l'app
+    </button>
   </div>
 
   <section class="timeline" id="timeline"></section>
@@ -505,6 +523,32 @@ sb.appendChild(trt);
 const bt=document.getElementById("backtop");
 window.addEventListener("scroll",()=>{bt.classList.toggle("show",window.scrollY>500);});
 bt.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+// ---------- PWA: service worker + install prompt ----------
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  });
+}
+let deferredPrompt=null;
+const installBtn=document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  if(installBtn) installBtn.hidden=false;
+});
+if(installBtn){
+  installBtn.addEventListener("click",async()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt=null;
+    installBtn.hidden=true;
+  });
+}
+window.addEventListener("appinstalled",()=>{
+  if(installBtn) installBtn.hidden=true;
+});
 </script>
 </body>
 </html>
