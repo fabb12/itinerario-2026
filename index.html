@@ -104,6 +104,45 @@
   .stop.start .dot{background:var(--muted);}
   .stop.end .dot{background:var(--gold);}
 
+  /* ---------- LEG DIVIDERS (Andata / Ritorno) ---------- */
+  .leg{
+    position:relative;padding-left:64px;margin:8px 0 22px;
+  }
+  .leg-badge{
+    display:inline-flex;align-items:center;gap:9px;
+    font-weight:800;letter-spacing:1.5px;font-size:.82rem;text-transform:uppercase;
+    color:#fff;padding:9px 18px;border-radius:24px;
+    box-shadow:0 4px 14px rgba(13,59,79,.22);
+  }
+  .leg.andata .leg-badge{background:linear-gradient(100deg,var(--sea),var(--teal));}
+  .leg.ritorno .leg-badge{background:linear-gradient(100deg,var(--gold),#c98a3a);}
+  .leg-badge .ico{font-size:1.05rem;}
+  .leg .leg-sub{font-size:.8rem;color:var(--muted);font-weight:600;margin-top:7px;padding-left:2px;}
+
+  /* colora la linea della timeline per fase */
+  .stop.andata .dot{background:var(--sea);}
+  .stop.ritorno .dot{background:var(--gold);color:#5a3d00;}
+  .stop.ritorno .card-head{background:linear-gradient(100deg,var(--gold),#c98a3a);}
+
+  /* ---------- DESTINAZIONE (Leuca) ---------- */
+  .stop.dest .dot{
+    background:var(--due);color:#fff;width:44px;height:44px;left:6px;top:2px;
+    box-shadow:0 0 0 5px var(--cream),0 0 0 8px rgba(176,39,42,.25);
+    animation:destPulse 2s ease-in-out infinite;
+  }
+  @keyframes destPulse{
+    0%,100%{box-shadow:0 0 0 5px var(--cream),0 0 0 8px rgba(176,39,42,.25);}
+    50%{box-shadow:0 0 0 5px var(--cream),0 0 0 11px rgba(176,39,42,.12);}
+  }
+  .stop.dest .card{border:2px solid var(--due);box-shadow:0 6px 22px rgba(176,39,42,.18);}
+  .stop.dest .card-head{background:linear-gradient(100deg,#b0272a,#d9534f);}
+  .stop.dest .card-head .place::before{content:"★ ";color:var(--sand);}
+  .dest-flag{
+    display:inline-block;background:var(--sand);color:#6b4200;
+    font-size:.64rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+    padding:2px 9px;border-radius:12px;margin-top:5px;
+  }
+
   .card{
     background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;
     box-shadow:0 2px 10px rgba(13,59,79,.06);
@@ -262,13 +301,13 @@
 const stops = [
   {
     n:"0", place:"Como", region:"Lombardia · Partenza", when:"11 LUG", nights:"Partenza",
-    type:"start",
+    type:"start", phase:"andata",
     note:"Punto di partenza del viaggio — direzione Siena via A9 / A1.",
     query:"Como, Italia",
     info:[["Distanza → Siena","≈ 420 km"],["Tempo di guida","≈ 4h 30m"]],
   },
   {
-    n:"1", place:"Siena", region:"Toscana · Sosta iniziale", when:"11–12 LUG", nights:"1 notte",
+    n:"1", place:"Siena", region:"Toscana · Sosta iniziale", when:"11–12 LUG", nights:"1 notte", phase:"andata",
     note:"Centro storico, Piazza del Campo, gastronomia locale.",
     query:"Via del Costone 11, 53100 Siena SI",
     info:[["Struttura","Siena Vip"],["Cod. prenotazione","1782198671"],["Telefono","+39 335 140 3212"],["Stato","<span class='badge'>Confermata</span>"]],
@@ -276,7 +315,7 @@ const stops = [
     costs:[["Totale tappa","€ 260,00","tot"],["Quota Noi","€ 150,00",""],["Quota Nonni","€ 110,00",""],["Saldo (Noi / Nonni)","€ 150,00 / € 110,00","due"]],
   },
   {
-    n:"2", place:"Gaeta", region:"Lazio · Sosta intermedia", when:"12–14 LUG", nights:"2 notti",
+    n:"2", place:"Gaeta", region:"Lazio · Sosta intermedia", when:"12–14 LUG", nights:"2 notti", phase:"andata",
     note:"Borgo antico, Montagna Spaccata, Spiaggia di Serapo.",
     query:"Lungomare Giovanni Caboto Vico XVI 10, 04024 Gaeta LT",
     info:[["Struttura","Vic e Vicariell"],["Telefono","349 281 7723"]],
@@ -284,7 +323,7 @@ const stops = [
     costs:[["Quota Nonni · €95×2","€ 190,00",""],["Quota Noi · €130×2","€ 260,00",""],["Totale tappa","€ 450,00","tot"],["Versato (1ª notte)","€ 225,00","paid"],["Saldo (Noi / Nonni)","€ 130,00 / € 95,00","due"]],
   },
   {
-    n:"3", place:"Matera", region:"Basilicata · Sosta serale", when:"14–15 LUG", nights:"1 notte",
+    n:"3", place:"Matera", region:"Basilicata · Sosta serale", when:"14–15 LUG", nights:"1 notte", phase:"andata",
     note:"Visita serale e tramonto dei Sassi.",
     query:"Via San Giovanni Vecchio 89, 75100 Matera MT",
     info:[["Struttura","Hotel Sassi"],["Telefono","0835 331009"]],
@@ -292,7 +331,7 @@ const stops = [
     costs:[["Prezzo camera","€ 209,00","tot"],["Noi (4/6) / Nonni (2/6)","€ 139,33 / € 69,67",""],["Caparra versata","€ 62,70","paid"],["Saldo (Noi / Nonni)","€ 97,53 / € 48,77","due"]],
   },
   {
-    n:"4", place:"Leuca", region:"Puglia · Soggiorno principale", when:"15–22 LUG", nights:"7 notti",
+    n:"4", place:"Leuca", region:"Puglia · Soggiorno principale", when:"15–22 LUG", nights:"7 notti", phase:"andata", dest:true,
     note:"Piscina: portare teli e cuffie (obbligatori). Cambio camera 20-21/07 → Villa Stasi.",
     query:"Contrada Serine, 73040 Castrignano del Capo LE",
     info:[["Struttura","Agriturismo Serine"],["Telefono","+39 339 602 6367"]],
@@ -300,7 +339,7 @@ const stops = [
     costs:[["Soggiorno + tassa","€ 2.626,00",""],["Quota Noi (4/6)","€ 1.750,66",""],["Quota Nonni (2/6)","€ 875,34",""],["Caparra versata","€ 750,00","paid"],["Saldo (Noi / Nonni)","€ 1.250,66 / € 625,34","due"]],
   },
   {
-    n:"5", place:"Lesina", region:"Puglia · Sosta ritorno", when:"22–23 LUG", nights:"1 notte",
+    n:"5", place:"Lesina", region:"Puglia · Sosta ritorno", when:"22–23 LUG", nights:"1 notte", phase:"ritorno",
     note:"Prenotato — Masseria Cannella.",
     query:"Strada Provinciale 35 KM 22, 71010 Lesina FG",
     info:[["Struttura","Masseria Cannella"],["Telefono","0882 1234567"]],
@@ -308,7 +347,7 @@ const stops = [
     costs:[["Noi · Quadrupla","€ 120,00",""],["Nonni · Matrimoniale","€ 90,00",""],["Totale tappa","€ 210,00","tot"],["Saldo (Noi / Nonni)","€ 120,00 / € 90,00","due"]],
   },
   {
-    n:"6", place:"Conero", region:"Marche · Sosta mare/borghi", when:"23–25 LUG", nights:"2 notti",
+    n:"6", place:"Conero", region:"Marche · Sosta mare/borghi", when:"23–25 LUG", nights:"2 notti", phase:"ritorno",
     note:"Intestatari: Giuseppina Mattiello e Fabio Fargnoli. Contatto: Andrea.",
     query:"Via Osimana 56, 60021 Camerano AN",
     info:[["Struttura","Dolce Conero Guest House"],["Telefono","+39 350 143 1665"],["Camere","Ginestra (Noi) & Lavanda (Nonni)"],["Tassa soggiorno","€1/pers/notte (bimbi <11 esenti)"],["Colazione (opz.)","€5/pers, su richiesta"]],
@@ -318,7 +357,7 @@ const stops = [
   },
   {
     n:"7", place:"Bologna", region:"Emilia-Romagna · Ultima tappa", when:"25–26 LUG", nights:"1 notte",
-    type:"end",
+    type:"end", phase:"ritorno",
     note:"Centro storico, gastronomia, università. Cena da valutare in loco.",
     query:"Via Cantapoiana 5, 40054 Budrio BO",
     info:[["Struttura","Agriturismo Pozzo Dei Desideri"],["Telefono","+39 351 541 3955"],["Contatto","Stefano"]],
@@ -356,9 +395,25 @@ stops.forEach((s,i)=>{
 
 // timeline
 const tl = document.getElementById("timeline");
+let lastPhase=null;
 stops.forEach((s,i)=>{
+  // inserisci il divisore di tratta quando cambia la fase (Andata / Ritorno)
+  if(s.phase && s.phase!==lastPhase){
+    const leg=document.createElement("div");
+    leg.className="leg "+s.phase;
+    if(s.phase==="andata"){
+      leg.innerHTML=`<span class="leg-badge"><span class="ico">🚗</span>Andata · verso Leuca</span>
+        <div class="leg-sub">Como → Siena → Gaeta → Matera → <b>Leuca</b></div>`;
+    }else{
+      leg.innerHTML=`<span class="leg-badge"><span class="ico">🔄</span>Ritorno · verso casa</span>
+        <div class="leg-sub">Leuca → Lesina → Conero → Bologna</div>`;
+    }
+    tl.appendChild(leg);
+    lastPhase=s.phase;
+  }
+
   const wrap=document.createElement("div");
-  wrap.className="stop"+(s.type?(" "+s.type):"");
+  wrap.className="stop"+(s.type?(" "+s.type):"")+(s.phase?(" "+s.phase):"")+(s.dest?" dest":"");
   wrap.id="stop-"+s.n;
 
   const info = s.info ? s.info.map(([k,v])=>`<div class="kv"><span class="k">${k}:</span> ${v}</div>`).join("") : "";
@@ -374,7 +429,7 @@ stops.forEach((s,i)=>{
     <div class="dot">${s.n}</div>
     <div class="card" data-i="${i}">
       <div class="card-head" onclick="toggleCard(${i})">
-        <div><div class="place">${s.place}</div><div class="region">${s.region}</div></div>
+        <div><div class="place">${s.place}</div><div class="region">${s.region}</div>${s.dest?'<span class="dest-flag">🎯 Destinazione principale</span>':""}</div>
         <div class="when">${s.when}<span class="nights">${s.nights}</span><span class="chev">▾</span></div>
       </div>
       <div class="card-body">
@@ -396,6 +451,7 @@ function toggleCard(i){
   card.classList.toggle("open");
 }
 document.querySelector('.card[data-i="1"]').classList.add("open");
+document.querySelector('.card[data-i="4"]').classList.add("open"); // Leuca — destinazione principale
 
 // summary table
 const sb=document.getElementById("sumBody");
