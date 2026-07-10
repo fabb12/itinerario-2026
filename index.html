@@ -102,6 +102,21 @@
   .btn-install{background:var(--gold);box-shadow:0 4px 14px rgba(212,162,78,.35);}
   .btn-install:hover{background:#c2913f;}
   .btn-install[hidden]{display:none;}
+  .btn-cal{background:var(--sea);box-shadow:0 4px 14px rgba(28,114,147,.35);}
+  .btn-cal:hover{background:#155f7d;}
+
+  /* ---------- BOX ANDROID AUTO ---------- */
+  .carbox{
+    background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:14px;padding:18px 20px;margin-bottom:40px;
+    box-shadow:0 2px 10px rgba(13,59,79,.06);
+  }
+  .carbox h2{font-size:1.05rem;color:var(--noi);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .carbox ul{margin:0 0 0 18px;font-size:.85rem;color:var(--ink);}
+  .carbox li{margin-bottom:7px;}
+  .carbox li:last-child{margin-bottom:0;}
+  .carbox b{color:var(--noi);}
+  .carbox .cap{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:10px;}
 
   /* timeline */
   .timeline{position:relative;}
@@ -307,11 +322,25 @@
       <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
       Apri l'intero itinerario su Google Maps
     </a>
+    <button class="btn-map btn-cal" id="icsBtn" type="button">
+      <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm4 6H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+      Aggiungi tappe al calendario
+    </button>
     <button class="btn-map btn-install" id="installBtn" type="button" hidden>
       <svg viewBox="0 0 24 24"><path d="M12 3a1 1 0 011 1v9.6l3.3-3.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-1.4 0l-5-5a1 1 0 011.4-1.4L11 13.6V4a1 1 0 011-1zM5 19h14a1 1 0 010 2H5a1 1 0 010-2z"/></svg>
       Installa l'app
     </button>
   </div>
+
+  <section class="carbox" id="androidauto">
+    <h2>🚗 In auto con Android Auto</h2>
+    <ul>
+      <li><b>Navigazione sullo schermo dell'auto:</b> tocca <b>Naviga</b> su una tappa (anche dal telefono, prima di partire): Google Maps avvia subito le indicazioni e Android Auto le mostra sullo schermo dell'auto.</li>
+      <li><b>Itinerario sullo schermo dell'auto:</b> tocca <b>Aggiungi tappe al calendario</b> e importa il file in Google Calendar: le tappe compaiono nell'app <b>Calendario</b> di Android Auto con indirizzo — un tocco e parte la navigazione.</li>
+      <li><b>Chiamare le strutture:</b> di' <i>"Hey Google, chiama +39 …"</i> (i numeri sono nel calendario e in ogni tappa), oppure usa il pulsante <b>Chiama</b> prima di metterti alla guida.</li>
+    </ul>
+    <p class="cap">Nota: Android Auto non può mostrare direttamente siti web o PWA — solo app approvate da Google (mappe, musica, messaggi). Questi pulsanti portano l'itinerario in auto attraverso Google Maps e Google Calendar.</p>
+  </section>
 
   <section class="timeline" id="timeline"></section>
 
@@ -353,6 +382,7 @@ const stops = [
   },
   {
     n:"1", place:"Siena", region:"Toscana · Sosta iniziale", when:"11–12 LUG", nights:"1 notte", phase:"andata",
+    ics:["20260711","20260712"],
     travel:{km:"≈ 420 km", time:"≈ 4h 30m"},
     note:"Centro storico, Piazza del Campo, gastronomia locale.",
     query:"Via del Costone 11, 53100 Siena SI",
@@ -362,6 +392,7 @@ const stops = [
   },
   {
     n:"2", place:"Gaeta", region:"Lazio · Sosta intermedia", when:"12–14 LUG", nights:"2 notti", phase:"andata",
+    ics:["20260712","20260714"],
     travel:{km:"≈ 375 km", time:"≈ 3h 50m"},
     note:"Borgo antico, Montagna Spaccata, Spiaggia di Serapo.",
     query:"Lungomare Giovanni Caboto Vico XVI 10, 04024 Gaeta LT",
@@ -371,6 +402,7 @@ const stops = [
   },
   {
     n:"3", place:"Matera", region:"Basilicata · Sosta serale", when:"14–15 LUG", nights:"1 notte", phase:"andata",
+    ics:["20260714","20260715"],
     travel:{km:"≈ 355 km", time:"≈ 3h 35m"},
     note:"Visita serale e tramonto dei Sassi.",
     query:"Via San Giovanni Vecchio 89, 75100 Matera MT",
@@ -380,6 +412,7 @@ const stops = [
   },
   {
     n:"4", place:"Leuca", region:"Puglia · Soggiorno principale", when:"15–22 LUG", nights:"7 notti", phase:"andata", dest:true,
+    ics:["20260715","20260722"],
     travel:{km:"≈ 230 km", time:"≈ 2h 45m"},
     note:"Piscina: portare teli e cuffie (obbligatori). Cambio camera 20-21/07 → Villa Stasi.",
     query:"Contrada Serine, 73040 Castrignano del Capo LE",
@@ -389,6 +422,7 @@ const stops = [
   },
   {
     n:"5", place:"Lesina", region:"Puglia · Sosta ritorno", when:"22–23 LUG", nights:"1 notte", phase:"ritorno",
+    ics:["20260722","20260723"],
     travel:{km:"≈ 350 km", time:"≈ 3h 55m"},
     note:"Prenotato — Masseria Cannella.",
     query:"Strada Provinciale 35 KM 22, 71010 Lesina FG",
@@ -398,6 +432,7 @@ const stops = [
   },
   {
     n:"6", place:"Conero", region:"Marche · Sosta mare/borghi", when:"23–25 LUG", nights:"2 notti", phase:"ritorno",
+    ics:["20260723","20260725"],
     travel:{km:"≈ 340 km", time:"≈ 3h 20m"},
     note:"Prenotato - Dolce Conero",
     query:"Via Osimana 56, 60021 Camerano AN",
@@ -409,6 +444,7 @@ const stops = [
   {
     n:"7", place:"Bologna", region:"Emilia-Romagna · Ultima tappa", when:"25–26 LUG", nights:"1 notte",
     type:"end", phase:"ritorno",
+    ics:["20260725","20260726"],
     travel:{km:"≈ 233 km", time:"≈ 2h 30m"},
     note:"Centro storico, gastronomia, università. Cena da valutare in loco.",
     query:"Via Cantapoiana 5, 40054 Budrio BO",
@@ -506,7 +542,9 @@ stops.forEach((s,i)=>{
   const hlt = s.highlights ? `<div class="hlt"><b>Da non perdere</b><ul>${s.highlights.map(h=>`<li>${h}</li>`).join("")}</ul></div>` : "";
 
   // build actions
-  let acts = `<a class="act route" href="${"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(s.query)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.7 11.3l-9-9c-.4-.4-1-.4-1.4 0l-9 9c-.4.4-.4 1 0 1.4l9 9c.4.4 1 .4 1.4 0l9-9c.4-.4.4-1 0-1.4zM14 14.5V12h-4v3H8v-4c0-.6.4-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>Indicazioni</a>`;
+  // dir_action=navigate: se Google Maps è installato (Android/iOS) avvia subito la
+  // navigazione guidata, che compare anche sullo schermo di Android Auto / CarPlay.
+  let acts = `<a class="act route" href="${"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(s.query)+"&travelmode=driving&dir_action=navigate"}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.7 11.3l-9-9c-.4-.4-1-.4-1.4 0l-9 9c-.4.4-.4 1 0 1.4l9 9c.4.4 1 .4 1.4 0l9-9c.4-.4.4-1 0-1.4zM14 14.5V12h-4v3H8v-4c0-.6.4-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>Naviga</a>`;
   acts += `<a class="act pin" href="${gmap(s.query)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>Vedi sulla mappa</a>`;
   if(s.tel) acts += `<a class="act tel" href="tel:${s.tel}"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg>Chiama</a>`;
 
@@ -555,6 +593,48 @@ sb.appendChild(trt);
 const bt=document.getElementById("backtop");
 window.addEventListener("scroll",()=>{bt.classList.toggle("show",window.scrollY>500);});
 bt.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+// ---------- Esporta tappe in un file calendario (.ics) ----------
+// Importato in Google Calendar, l'itinerario compare nell'app Calendario di
+// Android Auto: ogni tappa mostra l'indirizzo e avvia la navigazione con un tocco.
+const icsEsc = t => String(t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n");
+const icsFold = l => { // RFC 5545: righe max 75 ottetti, continuazione con spazio
+  let out=""; while(l.length>74){out+=l.slice(0,74)+"\r\n ";l=l.slice(74);} return out+l;
+};
+function buildICS(){
+  const dtstamp = new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+Z$/,"Z");
+  const lines = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Itinerario Luglio 2026//IT","CALSCALE:GREGORIAN","METHOD:PUBLISH"];
+  stops.forEach(s=>{
+    if(!s.ics) return;
+    const struttura = s.info ? (s.info.find(([k])=>k==="Struttura")||[])[1] : "";
+    const descParts = [];
+    if(struttura) descParts.push("Struttura: "+struttura);
+    if(s.tel) descParts.push("Telefono: "+s.tel);
+    if(s.note) descParts.push(s.note);
+    descParts.push("Naviga: https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(s.query)+"&travelmode=driving&dir_action=navigate");
+    lines.push(
+      "BEGIN:VEVENT",
+      "UID:tappa-"+s.n+"-luglio2026@itinerario",
+      "DTSTAMP:"+dtstamp,
+      "DTSTART;VALUE=DATE:"+s.ics[0],
+      "DTEND;VALUE=DATE:"+s.ics[1],
+      "SUMMARY:"+icsEsc("🚗 Tappa "+s.n+" · "+s.place+(struttura?" — "+struttura:"")),
+      "LOCATION:"+icsEsc(s.query),
+      "DESCRIPTION:"+icsEsc(descParts.join("\n")),
+      "END:VEVENT"
+    );
+  });
+  lines.push("END:VCALENDAR");
+  return lines.map(icsFold).join("\r\n")+"\r\n";
+}
+document.getElementById("icsBtn").addEventListener("click",()=>{
+  const blob = new Blob([buildICS()],{type:"text/calendar;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "itinerario-luglio-2026.ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+});
 
 // ---------- PWA: service worker + install prompt ----------
 if("serviceWorker" in navigator){

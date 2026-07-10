@@ -1,6 +1,6 @@
 /* Service Worker — Itinerario Luglio 2026
    Cache dell'app shell per uso offline (stale-while-revalidate). */
-const CACHE = 'itinerario-2026-v1';
+const CACHE = 'itinerario-2026-v2';
 const ASSETS = [
   './',
   './index.html',
