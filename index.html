@@ -178,7 +178,7 @@
   .card-body{
     max-height:0;overflow:hidden;transition:max-height .35s ease;
   }
-  .card.open .card-body{max-height:1400px;}
+  .card.open .card-body{max-height:1900px;}
   .body-inner{padding:16px 18px 18px;}
   .note{font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:12px;}
 
@@ -195,6 +195,20 @@
   .travel .tv-sep{color:var(--gold);font-weight:800;}
   .travel .tv-from{color:var(--muted);font-weight:600;}
   .travel.start{background:#f2ede3;border-left-color:var(--muted);color:var(--muted);cursor:default;}
+
+  /* ---------- MAPPA TRAGITTO TAPPA ---------- */
+  .stage-map{
+    margin-bottom:14px;border-radius:10px;overflow:hidden;
+    border:1px solid var(--line);box-shadow:0 2px 8px rgba(13,59,79,.08);
+    background:#e9eef0;
+  }
+  .stage-map iframe{width:100%;height:210px;border:0;display:block;}
+  .stage-map .map-cap{
+    display:flex;align-items:center;gap:6px;
+    font-size:.74rem;font-weight:700;color:var(--noi);
+    background:#eaf6f2;border-top:1px solid #d3e9e3;padding:7px 12px;
+  }
+  .stage-map .map-cap .ico{font-size:.9rem;}
 
   .info{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-bottom:14px;}
   .info .kv{font-size:.85rem;}
@@ -470,6 +484,23 @@ stops.forEach((s,i)=>{
     travel = `<div class="travel start"><span class="tv"><span class="ico">🚩</span>Punto di partenza</span></div>`;
   }
 
+  // mini-mappa del tragitto della tappa (tappa precedente → questa)
+  let stageMap = "";
+  if(s.travel && i>0){
+    const prev = stops[i-1];
+    const embed = `https://maps.google.com/maps?saddr=${encodeURIComponent(prev.query)}&daddr=${encodeURIComponent(s.query)}&z=7&output=embed`;
+    stageMap = `<div class="stage-map">
+        <iframe loading="lazy" src="${embed}" title="Tragitto da ${prev.place} a ${s.place}" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-cap"><span class="ico">🗺️</span>Tragitto ${prev.place} → ${s.place}</div>
+      </div>`;
+  } else if(s.type==="start"){
+    const embed = `https://maps.google.com/maps?q=${encodeURIComponent(s.query)}&z=9&output=embed`;
+    stageMap = `<div class="stage-map">
+        <iframe loading="lazy" src="${embed}" title="Punto di partenza: ${s.place}"></iframe>
+        <div class="map-cap"><span class="ico">🚩</span>Partenza da ${s.place}</div>
+      </div>`;
+  }
+
   const info = s.info ? s.info.map(([k,v])=>`<div class="kv"><span class="k">${k}:</span> ${v}</div>`).join("") : "";
   const costs = s.costs ? `<div class="costs">${s.costs.map(([l,a,c])=>`<div class="cost ${c}"><span>${l}</span><span class="amt">${a}</span></div>`).join("")}</div>` : "";
   const hlt = s.highlights ? `<div class="hlt"><b>Da non perdere</b><ul>${s.highlights.map(h=>`<li>${h}</li>`).join("")}</ul></div>` : "";
@@ -489,6 +520,7 @@ stops.forEach((s,i)=>{
       <div class="card-body">
         <div class="body-inner">
           ${travel}
+          ${stageMap}
           <div class="note">${s.note}</div>
           ${info?`<div class="info">${info}</div>`:""}
           ${costs}
