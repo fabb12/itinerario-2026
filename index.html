@@ -335,7 +335,7 @@
       </table>
     </div>
     <div class="finals">
-      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 1.495,63</div></div>
+      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 1.235,63</div></div>
       <div class="final nonni"><div class="fl">Saldo da versare — Nonni</div><div class="fa">€ 1.818,67</div></div>
     </div>
     <div class="disclaimer">
@@ -366,7 +366,7 @@ const stops = [
     n:"1", place:"Siena", region:"Toscana · Sosta iniziale", when:"11–12 LUG", nights:"1 notte", phase:"andata",
     travel:{km:"≈ 420 km", time:"≈ 4h 30m"},
     note:"Centro storico, Piazza del Campo, gastronomia locale. All'arrivo: scaricare i bagagli alla struttura, poi parcheggiare la macchina fuori dalle antiche mura storiche.",
-    query:"Via Esterna di Fontebranda 1, 53100 Siena SI",
+    query:"Via Fontebranda, 65, 53100 Siena SI",
     info:[["Struttura","Siena Vip"],["Cod. prenotazione","1782198671"],["Telefono","+39 371 693 1520"],["Stato","<span class='badge'>Confermata</span>"]],
     arrival:[
       "Indirizzo per chi arriva in macchina: <b>Via Fontebranda 65</b> — ingresso della struttura sul retro dell'edificio giallo (<a href='https://youtube.com/shorts/Zu8EOGNGg4g' target='_blank' rel='noopener'>video con le indicazioni</a>).",
@@ -376,7 +376,7 @@ const stops = [
       "Possibilità di parcheggio riservato al <b>S. Caterina Parking</b>: € 20,00/notte.",
     ],
     tel:"+393716931520",
-    costs:[["Totale tappa","€ 260,00","tot"],["Quota Noi","€ 150,00",""],["Quota Nonni","€ 110,00",""],["Saldo (Noi / Nonni)","€ 150,00 / € 110,00","due"]],
+    costs:[["Struttura","€ 265,00",""],["Parcheggio","€ 40,00",""],["Tassa di soggiorno","€ 10,00",""],["Totale tappa","€ 315,00","tot"],["Quota Noi","€ 205,00",""],["Quota Nonni","€ 110,00",""],["Versato","€ 315,00","paid"],["Saldo (Noi / Nonni)","-€ 110,00 / € 110,00","due"]],
   },
   {
     n:"2", place:"Gaeta", region:"Lazio · Sosta intermedia", when:"12–14 LUG", nights:"2 notti", phase:"andata",
@@ -437,7 +437,7 @@ const stops = [
 ];
 
 const summary = [
-  ["Siena","€ 260,00","€ 150,00","€ 110,00","€ 0,00","€ 150,00","€ 110,00"],
+  ["Siena","€ 315,00","€ 205,00","€ 110,00","€ 315,00","-€ 110,00","€ 110,00"],
   ["Gaeta","€ 450,00","€ 260,00","€ 190,00","€ 225,00","€ 35,00","€ 190,00"],
   ["Matera*","€ 209,00","€ 139,33","€ 69,67","€ 62,70","€ 76,63","€ 69,67"],
   ["Leuca","€ 2.575,00","€ 1.500,00","€ 1.075,00","€ 750,00","€ 750,00","€ 1.075,00"],
@@ -445,7 +445,7 @@ const summary = [
   ["Conero","€ 448,00","€ 264,00","€ 184,00","€ 0,00","€ 264,00","€ 184,00"],
   ["Bologna","€ 200,00","€ 100,00","€ 100,00","€ 0,00","€ 100,00","€ 100,00"],
 ];
-const totalRow = ["TOTALE","€ 4.352,00","€ 2.533,33","€ 1.818,67","€ 1.037,70","€ 1.495,63","€ 1.818,67"];
+const totalRow = ["TOTALE","€ 4.407,00","€ 2.588,33","€ 1.818,67","€ 1.352,70","€ 1.235,63","€ 1.818,67"];
 
 const gmap = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const gdir = (from,to) => "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(from)+"&destination="+encodeURIComponent(to);
