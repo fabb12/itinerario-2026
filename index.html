@@ -335,10 +335,11 @@
       </table>
     </div>
     <div class="finals">
-      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 2.112,20</div></div>
-      <div class="final nonni"><div class="fl">Saldo da versare — Nonni</div><div class="fa">€ 1.253,10</div></div>
+      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 1.746,30</div></div>
+      <div class="final nonni"><div class="fl">Saldo da versare — Nonni</div><div class="fa">€ 1.619,00</div></div>
     </div>
     <div class="disclaimer">
+      Tutte le caparre/acconti (colonna «Versato») sono state versate da <b>Noi</b>: vengono quindi scalate solo dal saldo di Noi. I <b>Nonni</b> (2 persone) devono comunque versare l'intera loro quota.<br>
       Matera e Leuca non riportavano una ripartizione camere esplicita: la quota è calcolata in proporzione al numero di persone (Noi 4/6, Nonni 2/6).
     </div>
   </section>
@@ -384,7 +385,7 @@ const stops = [
     query:"Lungomare Giovanni Caboto Vico XVI 10, 04024 Gaeta LT",
     info:[["Struttura","Vic e Vicariell"],["Telefono","349 281 7723"]],
     tel:"+393492817723",
-    costs:[["Quota Nonni · €95×2","€ 190,00",""],["Quota Noi · €130×2","€ 260,00",""],["Totale tappa","€ 450,00","tot"],["Versato (1ª notte)","€ 225,00","paid"],["Saldo (Noi / Nonni)","€ 130,00 / € 95,00","due"]],
+    costs:[["Quota Nonni · €95×2","€ 190,00",""],["Quota Noi · €130×2","€ 260,00",""],["Totale tappa","€ 450,00","tot"],["Versato (1ª notte)","€ 225,00","paid"],["Saldo (Noi / Nonni)","€ 35,00 / € 190,00","due"]],
   },
   {
     n:"3", place:"Matera", region:"Basilicata · Sosta serale", when:"14–15 LUG", nights:"1 notte", phase:"andata",
@@ -393,7 +394,7 @@ const stops = [
     query:"Via San Giovanni Vecchio 89, 75100 Matera MT",
     info:[["Struttura","Hotel Sassi"],["Telefono","0835 331009"]],
     tel:"+390835331009",
-    costs:[["Prezzo camera","€ 209,00","tot"],["Noi (4/6) / Nonni (2/6)","€ 139,33 / € 69,67",""],["Caparra versata","€ 62,70","paid"],["Saldo (Noi / Nonni)","€ 97,53 / € 48,77","due"]],
+    costs:[["Prezzo camera","€ 209,00","tot"],["Noi (4/6) / Nonni (2/6)","€ 139,33 / € 69,67",""],["Caparra versata","€ 62,70","paid"],["Saldo (Noi / Nonni)","€ 76,63 / € 69,67","due"]],
   },
   {
     n:"4", place:"Leuca", region:"Puglia · Soggiorno principale", when:"15–22 LUG", nights:"7 notti", phase:"andata", dest:true,
@@ -402,7 +403,7 @@ const stops = [
     query:"Contrada Serine, 73040 Castrignano del Capo LE",
     info:[["Struttura","Agriturismo Serine"],["Telefono","+39 339 602 6367"]],
     tel:"+393396026367",
-    costs:[["Soggiorno + tassa","€ 2.626,00",""],["Quota Noi (4/6)","€ 1.750,66",""],["Quota Nonni (2/6)","€ 875,34",""],["Caparra versata","€ 750,00","paid"],["Saldo (Noi / Nonni)","€ 1.250,66 / € 625,34","due"]],
+    costs:[["Soggiorno + tassa","€ 2.626,00",""],["Quota Noi (4/6)","€ 1.750,66",""],["Quota Nonni (2/6)","€ 875,34",""],["Caparra versata","€ 750,00","paid"],["Saldo (Noi / Nonni)","€ 1.000,66 / € 875,34","due"]],
   },
   {
     n:"5", place:"Lesina", region:"Puglia · Sosta ritorno", when:"22–23 LUG", nights:"1 notte", phase:"ritorno",
@@ -437,14 +438,14 @@ const stops = [
 
 const summary = [
   ["Siena","€ 260,00","€ 150,00","€ 110,00","€ 0,00","€ 150,00","€ 110,00"],
-  ["Gaeta","€ 450,00","€ 260,00","€ 190,00","€ 225,00","€ 130,00","€ 95,00"],
-  ["Matera*","€ 209,00","€ 139,33","€ 69,67","€ 62,70","€ 97,53","€ 48,77"],
-  ["Leuca*","€ 2.626,00","€ 1.750,66","€ 875,34","€ 750,00","€ 1.250,66","€ 625,34"],
+  ["Gaeta","€ 450,00","€ 260,00","€ 190,00","€ 225,00","€ 35,00","€ 190,00"],
+  ["Matera*","€ 209,00","€ 139,33","€ 69,67","€ 62,70","€ 76,63","€ 69,67"],
+  ["Leuca*","€ 2.626,00","€ 1.750,66","€ 875,34","€ 750,00","€ 1.000,66","€ 875,34"],
   ["Lesina","€ 210,00","€ 120,00","€ 90,00","€ 0,00","€ 120,00","€ 90,00"],
   ["Conero","€ 448,00","€ 264,00","€ 184,00","€ 0,00","€ 264,00","€ 184,00"],
   ["Bologna","€ 200,00","€ 100,00","€ 100,00","€ 0,00","€ 100,00","€ 100,00"],
 ];
-const totalRow = ["TOTALE","€ 4.403,00","€ 2.784,00","€ 1.619,00","€ 1.037,70","€ 2.112,20","€ 1.253,10"];
+const totalRow = ["TOTALE","€ 4.403,00","€ 2.784,00","€ 1.619,00","€ 1.037,70","€ 1.746,30","€ 1.619,00"];
 
 const gmap = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const gdir = (from,to) => "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(from)+"&destination="+encodeURIComponent(to);
