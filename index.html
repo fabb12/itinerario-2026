@@ -178,7 +178,7 @@
   .card-body{
     max-height:0;overflow:hidden;transition:max-height .35s ease;
   }
-  .card.open .card-body{max-height:1900px;}
+  .card.open .card-body{max-height:2600px;}
   .body-inner{padding:16px 18px 18px;}
   .note{font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:12px;}
 
@@ -223,6 +223,16 @@
   .cost.tot{color:var(--noi);font-weight:700;border-top:1px dashed var(--gold);margin-top:4px;padding-top:6px;}
   .cost.paid .amt{color:var(--paid);}
   .cost.due .amt{color:var(--due);}
+
+  .arrival{
+    background:#fdf3e0;border:1px solid var(--sand);border-radius:10px;
+    padding:12px 14px;font-size:.85rem;margin-bottom:14px;
+  }
+  .arrival .arr-title{color:var(--nonni);display:block;margin-bottom:4px;}
+  .arrival ul{margin:0 0 0 18px;}
+  .arrival li{margin-bottom:6px;}
+  .arrival li:last-child{margin-bottom:0;}
+  .arrival a{color:var(--sea);font-weight:700;}
 
   .hlt{font-size:.85rem;}
   .hlt b{color:var(--nonni);}
@@ -354,9 +364,16 @@ const stops = [
   {
     n:"1", place:"Siena", region:"Toscana · Sosta iniziale", when:"11–12 LUG", nights:"1 notte", phase:"andata",
     travel:{km:"≈ 420 km", time:"≈ 4h 30m"},
-    note:"Centro storico, Piazza del Campo, gastronomia locale.",
-    query:"Via del Costone 11, 53100 Siena SI",
+    note:"Centro storico, Piazza del Campo, gastronomia locale. All'arrivo: scaricare i bagagli alla struttura, poi parcheggiare la macchina fuori dalle antiche mura storiche.",
+    query:"Via Esterna di Fontebranda 1, 53100 Siena SI",
     info:[["Struttura","Siena Vip"],["Cod. prenotazione","1782198671"],["Telefono","+39 335 140 3212"],["Stato","<span class='badge'>Confermata</span>"]],
+    arrival:[
+      "Indirizzo per chi arriva in macchina: <b>Via Fontebranda 65</b> — ingresso della struttura sul retro dell'edificio giallo (<a href='https://youtube.com/shorts/Zu8EOGNGg4g' target='_blank' rel='noopener'>video con le indicazioni</a>).",
+      "Indirizzo GPS: <b>Via Esterna di Fontebranda 1</b> · uscita <b>SIENA OVEST</b> · direzione Siena Centro – STADIO · indicazioni per <b>PARCHEGGIO SANTA CATERINA</b>.",
+      "Accesso ZTL <b>solo</b> dal varco di Via Esterna di Fontebranda: non è possibile entrare da altri varchi per raggiungere la struttura.",
+      "Siamo in ZTL: la struttura comunica alla Polizia Municipale gli estremi della macchina. <b>Ogni transito</b> sotto il varco va segnalato <b>per iscritto</b> (targa + orario di passaggio) — non sono accettate comunicazioni verbali.",
+      "Possibilità di parcheggio riservato al <b>S. Caterina Parking</b>: € 20,00/notte.",
+    ],
     tel:"+393351403212",
     costs:[["Totale tappa","€ 260,00","tot"],["Quota Noi","€ 150,00",""],["Quota Nonni","€ 110,00",""],["Saldo (Noi / Nonni)","€ 150,00 / € 110,00","due"]],
   },
@@ -502,6 +519,7 @@ stops.forEach((s,i)=>{
   }
 
   const info = s.info ? s.info.map(([k,v])=>`<div class="kv"><span class="k">${k}:</span> ${v}</div>`).join("") : "";
+  const arrival = s.arrival ? `<div class="arrival"><b class="arr-title">🅿️ Arrivo in auto &amp; ZTL</b><ul>${s.arrival.map(a=>`<li>${a}</li>`).join("")}</ul></div>` : "";
   const costs = s.costs ? `<div class="costs">${s.costs.map(([l,a,c])=>`<div class="cost ${c}"><span>${l}</span><span class="amt">${a}</span></div>`).join("")}</div>` : "";
   const hlt = s.highlights ? `<div class="hlt"><b>Da non perdere</b><ul>${s.highlights.map(h=>`<li>${h}</li>`).join("")}</ul></div>` : "";
 
@@ -525,6 +543,7 @@ stops.forEach((s,i)=>{
           ${stageMap}
           <div class="note">${s.note}</div>
           ${info?`<div class="info">${info}</div>`:""}
+          ${arrival}
           ${costs}
           ${hlt}
           <div class="actions">${acts}</div>
