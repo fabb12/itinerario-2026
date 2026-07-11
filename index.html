@@ -335,8 +335,8 @@
       </table>
     </div>
     <div class="finals">
-      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 1.746,30</div></div>
-      <div class="final nonni"><div class="fl">Saldo da versare — Nonni</div><div class="fa">€ 1.619,00</div></div>
+      <div class="final noi"><div class="fl">Saldo da versare — Noi</div><div class="fa">€ 3.126,30</div></div>
+      <div class="final nonni"><div class="fl">Saldo da versare — Nonni</div><div class="fa">€ 2.604,00</div></div>
     </div>
     <div class="disclaimer">
       Tutte le caparre/acconti (colonna «Versato») sono state versate da <b>Noi</b>: vengono quindi scalate solo dal saldo di Noi. I <b>Nonni</b> (2 persone) devono comunque versare l'intera loro quota.<br>
@@ -412,7 +412,7 @@ const stops = [
     query:"Strada Provinciale 35 KM 22, 71010 Lesina FG",
     info:[["Struttura","Masseria Cannella"],["Telefono","0882 1234567"]],
     tel:"+3908821234567",
-    costs:[["Noi · Quadrupla","€ 120,00",""],["Nonni · Matrimoniale","€ 90,00",""],["Totale tappa","€ 210,00","tot"],["Saldo (Noi / Nonni)","€ 120,00 / € 90,00","due"]],
+    costs:[["Noi · Quadrupla","€ 1.500,00",""],["Nonni · Matrimoniale","€ 1.075,00",""],["Totale tappa","€ 2.575,00","tot"],["Saldo (Noi / Nonni)","€ 1.500,00 / € 1.075,00","due"]],
   },
   {
     n:"6", place:"Conero", region:"Marche · Sosta mare/borghi", when:"23–25 LUG", nights:"2 notti", phase:"ritorno",
@@ -441,11 +441,11 @@ const summary = [
   ["Gaeta","€ 450,00","€ 260,00","€ 190,00","€ 225,00","€ 35,00","€ 190,00"],
   ["Matera*","€ 209,00","€ 139,33","€ 69,67","€ 62,70","€ 76,63","€ 69,67"],
   ["Leuca*","€ 2.626,00","€ 1.750,66","€ 875,34","€ 750,00","€ 1.000,66","€ 875,34"],
-  ["Lesina","€ 210,00","€ 120,00","€ 90,00","€ 0,00","€ 120,00","€ 90,00"],
+  ["Lesina","€ 2.575,00","€ 1.500,00","€ 1.075,00","€ 0,00","€ 1.500,00","€ 1.075,00"],
   ["Conero","€ 448,00","€ 264,00","€ 184,00","€ 0,00","€ 264,00","€ 184,00"],
   ["Bologna","€ 200,00","€ 100,00","€ 100,00","€ 0,00","€ 100,00","€ 100,00"],
 ];
-const totalRow = ["TOTALE","€ 4.403,00","€ 2.784,00","€ 1.619,00","€ 1.037,70","€ 1.746,30","€ 1.619,00"];
+const totalRow = ["TOTALE","€ 6.768,00","€ 4.164,00","€ 2.604,00","€ 1.037,70","€ 3.126,30","€ 2.604,00"];
 
 const gmap = q => "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const gdir = (from,to) => "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(from)+"&destination="+encodeURIComponent(to);
